@@ -59,4 +59,12 @@ public class ArticleController {
         Article article = articles.get(articleName);
         return article.getComment(commentTitle);
     }
+
+    public User login(String name, String password) throws SystemException {
+        return userController.login(name, password);
+    }
+
+    public void logout(String userName) throws SystemException {
+        userController.logout(userName);
+    }
 }

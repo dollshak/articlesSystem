@@ -6,9 +6,9 @@ import com.example.demo2.Server.ResponseObjects.ResponseUser;
 
 public interface Iapi {
     //create
-    ResponseUser createUser(String userObject);
-    ResponseArticle createArticle(String articleObject);
-    ResponseComment createComment(String commentObject);
+    void createUser(String userObject);
+    void createArticle(String articleObject);
+    void createComment(String commentObject);
 
     //get
     ResponseUser getUser(String userName);

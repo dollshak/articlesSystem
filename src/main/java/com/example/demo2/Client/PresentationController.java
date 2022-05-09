@@ -67,17 +67,18 @@ public class PresentationController {
         Map<String, String> values = new HashMap<>();
         values.put("name", "john");
         values.put("password", "123");
+        values.put("validatePassword", "123");
         ObjectMapper objectMapper = new ObjectMapper();
         try {
             String requestBody = objectMapper.writeValueAsString(values);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/rest/register"))
+                    .uri(URI.create("http://localhost:8080/rest/createUser"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
             HttpResponse<String> response = client.send(request,
                     HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
+            parseUser(response.body());
         }catch (Exception e){}
     }
 

@@ -1,5 +1,9 @@
 package com.example.demo2.Server.RequestObjects;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
+
 public class RequestArticle {
     private String title;
     private String body;
@@ -30,5 +34,15 @@ public class RequestArticle {
 
     public void setWriterName(String writerName) {
         this.writerName = writerName;
+    }
+
+    public RequestArticle deserialize(String jsonArticle) {
+        RequestArticle toReturn = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Map<String, Object> map = mapper.readValue(jsonArticle, Map.class);
+            toReturn = (RequestArticle) map.get(0);
+        }catch (Exception e){}
+        return toReturn;
     }
 }

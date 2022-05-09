@@ -1,11 +1,16 @@
 package com.example.demo2.Server.RequestObjects;
 
-public class RequsetUser {
+import com.example.demo2.Server.ResponseObjects.ResponseUser;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.Map;
+
+public class RequestUser {
     private String name;
     private String password;
     private String validatePassword;
 
-    public RequsetUser() {
+    public RequestUser() {
     }
 
     public String getName() {
@@ -30,5 +35,15 @@ public class RequsetUser {
 
     public void setValidatePassword(String validatePassword) {
         this.validatePassword = validatePassword;
+    }
+
+    public RequestUser deserialize(String jsonUser){
+        RequestUser toReturn = null;
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Map<String, Object> map = mapper.readValue(jsonUser, Map.class);
+            toReturn = (RequestUser) map.get(0);
+        }catch (Exception e){}
+        return toReturn;
     }
 }

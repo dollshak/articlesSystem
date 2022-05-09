@@ -3,26 +3,27 @@ package com.example.demo2.Server.ResponseObjects;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ResponseUser extends Response{
     private String name;
-    private String password;
-    private Map<String, ResponseArticle> articles;
+    private List<String> articles;
     private Map<String, ResponseComment> comments;
 
     public ResponseUser(){}
 
     public ResponseUser(User user) {
         this.name = user.getName();
-        this.password = user.getPassword();
         //initialize articles
-        this.articles = new HashMap<>();
-        Map<String, Article> businessArticles = user.getArticles();
-        for (Map.Entry<String, Article> entry : businessArticles.entrySet())
-            this.articles.put(entry.getKey(), new ResponseArticle(entry.getValue()));
+        this.articles = new ArrayList<>();
+        List<String> businessArticles = user.getArticles();
+        for (String articleName : businessArticles)
+            this.articles.add(articleName);
 
         //initialize comments
         this.comments = new HashMap<>();
@@ -43,19 +44,11 @@ public class ResponseUser extends Response{
         this.name = name;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Map<String, ResponseArticle> getArticles() {
+    public List<String> getArticles() {
         return articles;
     }
 
-    public void setArticles(Map<String, ResponseArticle> articles) {
+    public void setArticles(List<String> articles) {
         this.articles = articles;
     }
 
@@ -66,4 +59,5 @@ public class ResponseUser extends Response{
     public void setComments(Map<String, ResponseComment> comments) {
         this.comments = comments;
     }
+
 }
