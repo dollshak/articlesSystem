@@ -1,14 +1,12 @@
-package com.example.demo2.Server.objects;
+package com.example.demo2.Server.RequestObjects;
 
-public class user {
+public class RequsetUser {
     private String name;
     private String password;
+    private String validatePassword;
 
-    public user(String name, String password) {
-        this.name = name;
-        this.password = password;
+    public RequsetUser() {
     }
-    public user(){}
 
     public String getName() {
         return name;
@@ -26,5 +24,11 @@ public class user {
         this.password = password;
     }
 
+    public String getValidatePassword() {
+        return validatePassword;
+    }
 
+    public void setValidatePassword(String validatePassword) {
+        this.validatePassword = validatePassword;
+    }
 }

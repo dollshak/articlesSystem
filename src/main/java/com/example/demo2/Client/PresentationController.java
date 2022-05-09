@@ -72,7 +72,7 @@ public class PresentationController {
             String requestBody = objectMapper.writeValueAsString(values);
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create("http://localhost:8080/rest/user"))
+                    .uri(URI.create("http://localhost:8080/rest/register"))
                     .POST(HttpRequest.BodyPublishers.ofString(requestBody))
                     .build();
             HttpResponse<String> response = client.send(request,

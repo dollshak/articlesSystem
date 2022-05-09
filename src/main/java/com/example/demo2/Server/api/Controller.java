@@ -1,10 +1,11 @@
 package com.example.demo2.Server.api;
 
+import com.example.demo2.Server.ResponseObjects.ResponseComment;
+import com.example.demo2.Server.ResponseObjects.ResponseUser;
 import com.example.demo2.Server.Services.ArticleService;
 import com.example.demo2.Server.Services.CommentService;
 import com.example.demo2.Server.Services.UserService;
-import com.example.demo2.Server.objects.user;
-import com.example.demo2.Server.Services.service;
+import com.example.demo2.Server.ResponseObjects.ResponseArticle;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -15,7 +16,7 @@ import java.util.Map;
 
 @RequestMapping(value = "/rest")
 @RestController
-public class Controller {
+public class Controller implements Iapi{
     private final UserService userService;
     private final ArticleService articleService;
     private final CommentService commentService;
@@ -32,29 +33,58 @@ public class Controller {
         this.commentService = commentService;
     }
 
-    @PostMapping("/user")
-    public String register(@RequestBody String jsonUser){
-        user user = deserialize(jsonUser);
-        return "registered successfully";
+
+    @PostMapping("/createUser")
+    @Override
+    public ResponseUser createUser(@RequestBody String userObject) {
+        return null;
     }
 
-    @GetMapping
-    public user login(){
-        System.out.println("hi from controller");
-        user user = new user("shaked" , "sisma");
-        return user;
+    @PostMapping("/createArticle")
+    @Override
+    public ResponseArticle createArticle(@RequestBody String articleObject) {
+        return null;
+    }
+    @PostMapping("/createComment")
+    @Override
+    public ResponseComment createComment(@RequestBody String commentObject) {
+        return null;
     }
 
-    public user getUser(@RequestBody String name){
-        return new user(name, "sisma");
+    @GetMapping("/getUser")
+    @Override
+    public ResponseUser getUser(String userName) {
+        return null;
     }
 
-    public user deserialize(String jsonUser){
-        user toReturn = null;
+    @GetMapping("getArticle")
+    @Override
+    public ResponseArticle getArticle(@RequestBody String articleName) {
+        return null;
+    }
+
+    @GetMapping("getComment")
+    @Override
+    public ResponseComment getComment(@RequestBody String commentObject) {
+        return null;
+    }
+
+    @PostMapping("/login")
+    public ResponseUser login(@RequestBody String userObject){
+        return null;
+    }
+
+    @PostMapping("/logout")
+    public ResponseUser logout(@RequestBody String userObject){
+        return null;
+    }
+
+    public ResponseUser deserialize(String jsonUser){
+        ResponseUser toReturn = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
             Map<String, Object> map = mapper.readValue(jsonUser, Map.class);
-            toReturn = (user) map.get(0);
+            toReturn = (ResponseUser) map.get(0);
         }catch (Exception e){}
         return toReturn;
     }
