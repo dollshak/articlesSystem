@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Article {
-    private String title;
+    private final String title; //unique
     private String body;
     private String writerName;
     private Map<String, Comment> comments;

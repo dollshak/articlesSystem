@@ -26,7 +26,9 @@ public class UserController {
             throw new SystemException("username already exists in the system, please choose another username");
         if (!password.equals(validatePassword))
             throw new SystemException("password doesn't match");
-        return new User(name, password);
+        User newUser = new User(name, password);
+        users.put(name, newUser);
+        return newUser;
     }
 
     public User getUser(String name) throws SystemException {

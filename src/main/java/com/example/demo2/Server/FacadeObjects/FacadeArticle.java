@@ -1,34 +1,33 @@
-package com.example.demo2.Server.ResponseObjects;
+package com.example.demo2.Server.FacadeObjects;
 
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class ResponseArticle extends Response {
+public class FacadeArticle extends Response {
     private String title;
     private String body;
     private String writerName;
-    private Map<String, ResponseComment> comments;
+    private Map<String, FacadeComment> comments;
 
-    public ResponseArticle(){
+    public FacadeArticle(){
         this.comments = new HashMap<>();
     }
 
-    public ResponseArticle(Article article) {
+    public FacadeArticle(Article article) {
         this.title = article.getTitle();
         this.body = article.getBody();
         this.writerName = article.getWriterName();
         this.comments = new HashMap<>();
         Map<String, Comment> businessComments = article.getComments();
         for (Map.Entry<String, Comment> entry : businessComments.entrySet()){
-            ResponseComment responseComment = new ResponseComment(entry.getValue());
+            FacadeComment responseComment = new FacadeComment(entry.getValue());
             this.comments.put(entry.getKey(), responseComment);
         }
     }
 
-    public ResponseArticle(String message) {
+    public FacadeArticle(String message) {
         super(message);
     }
 
@@ -56,11 +55,11 @@ public class ResponseArticle extends Response {
         this.writerName = writerName;
     }
 
-    public Map<String, ResponseComment> getComments() {
+    public Map<String, FacadeComment> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, ResponseComment> comments) {
+    public void setComments(Map<String, FacadeComment> comments) {
         this.comments = comments;
     }
 }

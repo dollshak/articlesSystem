@@ -1,17 +1,21 @@
-package com.example.demo2.Server.RequestObjects;
+package com.example.demo2.Client.RequestObjects;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.util.List;
 import java.util.Map;
 
 public class RequestUser {
     private String name;
     private String password;
     private String validatePassword;
-    private List<RequestArticle> articles;
 
     public RequestUser() {
+    }
+
+    public RequestUser(String name, String password, String validatePassword) {
+        this.name = name;
+        this.password = password;
+        this.validatePassword = validatePassword;
     }
 
     public String getName() {
@@ -38,21 +42,13 @@ public class RequestUser {
         this.validatePassword = validatePassword;
     }
 
-    public RequestUser deserialize(String jsonUser){
-        RequestUser toReturn = null;
+    public com.example.demo2.Server.RequestObjects.RequestUser deserialize(String jsonUser){
+        com.example.demo2.Server.RequestObjects.RequestUser toReturn = null;
         ObjectMapper mapper = new ObjectMapper();
         try {
             Map<String, Object> map = mapper.readValue(jsonUser, Map.class);
-            toReturn = (RequestUser) map.get(0);
+            toReturn = (com.example.demo2.Server.RequestObjects.RequestUser) map.get(0);
         }catch (Exception e){}
         return toReturn;
-    }
-
-    public List<RequestArticle> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(List<RequestArticle> articles) {
-        this.articles = articles;
     }
 }

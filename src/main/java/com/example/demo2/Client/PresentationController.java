@@ -1,5 +1,6 @@
 package com.example.demo2.Client;
 
+import com.example.demo2.Client.RequestObjects.RequestUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
@@ -62,8 +63,40 @@ public class PresentationController {
                 .join();
     }
 
+    //GET with arguments example
+    public void getUser(String name){
+        try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/rest/getUser?name="+ name))
+                    .GET()
+                    .build();
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            parseUser(response.body());
+        }catch (Exception e){}
+    }
+
     //POST with arguments example
-    public void register(){
+    public void register(String name, String password, String validatePassword){
+        RequestUser requestUser = new RequestUser(name, password, validatePassword);
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            String requestBody = objectMapper.writeValueAsString(requestUser);
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create("http://localhost:8080/rest/createUser"))
+                    .POST(HttpRequest.BodyPublishers.ofString(requestBody))
+                    .build();
+            HttpResponse<String> response = client.send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            parseUser(response.body());
+        }catch (Exception e){}
+    }
+
+
+
+    public void register1(){
         Map<String, String> values = new HashMap<>();
         values.put("name", "john");
         values.put("password", "123");

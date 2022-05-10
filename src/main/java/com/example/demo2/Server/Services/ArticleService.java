@@ -2,7 +2,7 @@ package com.example.demo2.Server.Services;
 
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
-import com.example.demo2.Server.ResponseObjects.ResponseArticle;
+import com.example.demo2.Server.FacadeObjects.FacadeArticle;
 import org.springframework.stereotype.Service;
 import com.example.demo2.Server.RequestObjects.*;
 
@@ -14,25 +14,25 @@ public class ArticleService {
         this.articleController = ArticleController.getInstance();
     }
 
-    public ResponseArticle createArticle(RequestArticle articleToCreate){
-        ResponseArticle toReturn;
+    public FacadeArticle createArticle(RequestArticle articleToCreate){
+        FacadeArticle toReturn;
         try{
             Article article = articleController.createArticle(articleToCreate.getTitle(),
                     articleToCreate.getBody(), articleToCreate.getWriterName());
-            toReturn = new ResponseArticle(article);
+            toReturn = new FacadeArticle(article);
         }catch (Exception e){
-            toReturn = new ResponseArticle(e.getMessage());
+            toReturn = new FacadeArticle(e.getMessage());
         }
         return toReturn;
     }
 
-    public ResponseArticle getArticle(String articleName){
-        ResponseArticle toReturn;
+    public FacadeArticle getArticle(String articleName){
+        FacadeArticle toReturn;
         try{
             Article article = articleController.getArticle(articleName);
-            toReturn = new ResponseArticle(article);
+            toReturn = new FacadeArticle(article);
         }catch (Exception e){
-            toReturn = new ResponseArticle(e.getMessage());
+            toReturn = new FacadeArticle(e.getMessage());
         }
         return toReturn;
     }

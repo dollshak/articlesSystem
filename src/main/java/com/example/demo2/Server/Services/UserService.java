@@ -4,7 +4,7 @@ import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.RequestObjects.RequestLogin;
 import com.example.demo2.Server.RequestObjects.RequestUser;
-import com.example.demo2.Server.ResponseObjects.ResponseUser;
+import com.example.demo2.Server.FacadeObjects.FacadeUser;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,38 +15,38 @@ public class UserService {
         articleController = ArticleController.getInstance();
     }
 
-    public ResponseUser createUser(RequestUser userToCreate) {
-        ResponseUser toReturn;
+    public FacadeUser createUser(RequestUser userToCreate) {
+        FacadeUser toReturn;
         try {
             User user = articleController.createUser(userToCreate.getName(),
                     userToCreate.getPassword(),
                     userToCreate.getValidatePassword());
-            toReturn = new ResponseUser(user);
+            toReturn = new FacadeUser(user);
         }catch (Exception e){
-            toReturn = new ResponseUser(e.getMessage());
+            toReturn = new FacadeUser(e.getMessage());
         }
         return toReturn;
     }
 
-    public ResponseUser getUser(String userName){
-        ResponseUser toReturn;
+    public FacadeUser getUser(String userName){
+        FacadeUser toReturn;
         try {
             User user = articleController.getUser(userName);
-            toReturn = new ResponseUser(user);
+            toReturn = new FacadeUser(user);
         }catch (Exception e){
-            toReturn = new ResponseUser(e.getMessage());
+            toReturn = new FacadeUser(e.getMessage());
         }
         return toReturn;
     }
 
-    public ResponseUser login(RequestLogin requestUser){
-        ResponseUser toReturn;
+    public FacadeUser login(RequestLogin requestUser){
+        FacadeUser toReturn;
         try {
             User user = articleController.login(requestUser.getName(),
                     requestUser.getPassword());
-            toReturn = new ResponseUser(user);
+            toReturn = new FacadeUser(user);
         }catch (Exception e){
-            toReturn = new ResponseUser(e.getMessage());
+            toReturn = new FacadeUser(e.getMessage());
         }
         return toReturn;
     }

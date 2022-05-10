@@ -31,7 +31,9 @@ public class ArticleController {
 
     public Article createArticle(String title, String body, String writer) throws SystemException {
         User user = userController.getLoggedInUser(writer);
-        return user.CreateArticle(title, body);
+        Article article = user.CreateArticle(title, body);
+        articles.put(article.getTitle() , article);
+        return article;
     }
 
     public Comment createComment(String title, String comment, String articleName, String commenter) throws SystemException {

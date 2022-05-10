@@ -1,4 +1,4 @@
-package com.example.demo2.Server.ResponseObjects;
+package com.example.demo2.Server.FacadeObjects;
 
 public abstract class Response {
     private String errorMessage;

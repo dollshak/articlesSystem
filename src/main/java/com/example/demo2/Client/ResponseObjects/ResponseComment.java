@@ -1,23 +1,12 @@
-package com.example.demo2.Server.ResponseObjects;
+package com.example.demo2.Client.ResponseObjects;
 
-import com.example.demo2.Server.Business.BusinessObjects.Comment;
-
-public class ResponseComment extends Response{
+public class ResponseComment {
     private int id;
     private String writer;
     private String title;
     private String commentBody;
 
-    public ResponseComment(){}
-    public ResponseComment(Comment comment) {
-        this.id = comment.getId();
-        this.writer = comment.getWriter();
-        this.title = comment.getTitle();
-        this.commentBody = comment.getCommentBody();
-    }
-
-    public ResponseComment(String message) {
-        super(message);
+    public ResponseComment() {
     }
 
     public int getId() {

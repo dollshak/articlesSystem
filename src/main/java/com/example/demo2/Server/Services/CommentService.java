@@ -1,10 +1,8 @@
 package com.example.demo2.Server.Services;
 
-import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
-import com.example.demo2.Server.ResponseObjects.ResponseArticle;
-import com.example.demo2.Server.ResponseObjects.ResponseComment;
+import com.example.demo2.Server.FacadeObjects.FacadeComment;
 import org.springframework.stereotype.Service;
 import com.example.demo2.Server.RequestObjects.*;
 
@@ -16,32 +14,30 @@ public class CommentService {
         this.articleController = ArticleController.getInstance();
     }
 
-    public ResponseComment createComment(RequestComment commentToCreate){
-        ResponseComment toReturn;
+    public FacadeComment createComment(RequestComment commentToCreate){
+        FacadeComment toReturn;
         try{
             Comment comment = articleController.createComment(commentToCreate.getTitle(),
                     commentToCreate.getCommentBody(),
                     commentToCreate.getArticleName(),
                     commentToCreate.getWriter());
-            toReturn = new ResponseComment(comment);
+            toReturn = new FacadeComment(comment);
         }catch (Exception e){
-            toReturn = new ResponseComment(e.getMessage());
+            toReturn = new FacadeComment(e.getMessage());
         }
         return toReturn;
     }
 
-    public ResponseComment getComment(RequestComment commentToReturn){
-        ResponseComment toReturn;
+    public FacadeComment getComment(RequestComment commentToReturn){
+        FacadeComment toReturn;
         try{
             Comment comment = articleController.getComment(commentToReturn.getArticleName(),
                     commentToReturn.getTitle());
-            toReturn = new ResponseComment(comment);
+            toReturn = new FacadeComment(comment);
         }catch (Exception e){
-            toReturn = new ResponseComment(e.getMessage());
+            toReturn = new FacadeComment(e.getMessage());
         }
         return toReturn;
     }
-
-
 
 }
