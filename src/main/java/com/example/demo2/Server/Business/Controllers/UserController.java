@@ -21,11 +21,9 @@ public class UserController {
         users = new HashMap<>();
     }
 
-    public User createUser(String name, String password, String validatePassword) throws SystemException {
+    public User createUser(String name, String password) throws SystemException {
         if (users.containsKey(name))
             throw new SystemException("username already exists in the system, please choose another username");
-        if (!password.equals(validatePassword))
-            throw new SystemException("password doesn't match");
         User newUser = new User(name, password);
         users.put(name, newUser);
         return newUser;

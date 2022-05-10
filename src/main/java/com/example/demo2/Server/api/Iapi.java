@@ -9,23 +9,23 @@ public interface Iapi {
     /**
      *
      * @param user
-     * @return new user's name
+     * @return
      */
-    String createUser(FacadeUser user);
+    FacadeUser createUser(FacadeUser user);
 
     /**
      *
      * @param article
      * @return new article's name
      */
-    String createArticle(FacadeArticle article);
+    FacadeArticle createArticle(FacadeArticle article);
 
     /**
      *
      * @param comment
      * @return new comment's id
      */
-    int createComment(FacadeComment comment);
+    FacadeComment createComment(FacadeComment comment);
 
     /**
      *

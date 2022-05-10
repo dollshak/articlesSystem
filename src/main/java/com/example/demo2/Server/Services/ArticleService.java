@@ -14,17 +14,17 @@ public class ArticleService {
         this.articleController = ArticleController.getInstance();
     }
 
-    public FacadeArticle createArticle(RequestArticle articleToCreate){
-        FacadeArticle toReturn;
-        try{
-            Article article = articleController.createArticle(articleToCreate.getTitle(),
-                    articleToCreate.getBody(), articleToCreate.getWriterName());
-            toReturn = new FacadeArticle(article);
-        }catch (Exception e){
-            toReturn = new FacadeArticle(e.getMessage());
-        }
-        return toReturn;
-    }
+//    public String createArticle(RequestArticle articleToCreate){
+//        FacadeArticle toReturn;
+//        try{
+//            Article article = articleController.createArticle(articleToCreate.getTitle(),
+//                    articleToCreate.getBody(), articleToCreate.getWriterName());
+//            toReturn = new FacadeArticle(article);
+//        }catch (Exception e){
+//            toReturn = new FacadeArticle(e.getMessage());
+//        }
+//        return toReturn;
+//    }
 
     public FacadeArticle getArticle(String articleName){
         FacadeArticle toReturn;
