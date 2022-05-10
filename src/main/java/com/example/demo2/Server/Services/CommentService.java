@@ -6,7 +6,6 @@ import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.CommentController;
 import com.example.demo2.Server.FacadeObjects.FacadeComment;
 import org.springframework.stereotype.Service;
-import com.example.demo2.Server.RequestObjects.*;
 
 @Service
 public class CommentService {

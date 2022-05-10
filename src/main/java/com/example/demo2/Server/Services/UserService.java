@@ -3,8 +3,6 @@ package com.example.demo2.Server.Services;
 import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.UserController;
-import com.example.demo2.Server.RequestObjects.RequestLogin;
-import com.example.demo2.Server.RequestObjects.RequestUser;
 import com.example.demo2.Server.FacadeObjects.FacadeUser;
 import org.springframework.stereotype.Service;
 
