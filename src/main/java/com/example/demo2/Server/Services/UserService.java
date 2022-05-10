@@ -28,15 +28,15 @@ public class UserService {
         return toReturn;
     }
 
-//    public FacadeUser getUser(String userName){
-//        FacadeUser toReturn;
-//        try {
-//            User user = articleController.getUser(userName);
-//            toReturn = new FacadeUser(user);
-//        }catch (Exception e){
-//            toReturn = new FacadeUser(e.getMessage());
-//        }
-//        return toReturn;
-//    }
+    public FacadeUser getUser(String userName){
+        FacadeUser toReturn;
+        try {
+            User user = userController.getUser(userName);
+            toReturn = new FacadeUser(user);
+        }catch (Exception e){
+            toReturn = new FacadeUser(e.getMessage());
+        }
+        return toReturn;
+    }
 
 }

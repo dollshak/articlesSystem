@@ -6,6 +6,7 @@ public class FacadeComment extends Response{
     private int id;
     private String writer;
     private String title;
+    private String article;
     private String commentBody;
 
     public FacadeComment(){}
@@ -50,5 +51,13 @@ public class FacadeComment extends Response{
 
     public void setCommentBody(String commentBody) {
         this.commentBody = commentBody;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
     }
 }

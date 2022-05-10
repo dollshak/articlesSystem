@@ -10,9 +10,11 @@ import java.util.Map;
 
 public class ArticleController {
     private Map<String, Article> articles;
+    private UserController userController;
     private static ArticleController instance;
 
-    public synchronized static ArticleController getInstance() {
+
+    public static ArticleController getInstance() {
         if (instance == null)
             instance = new ArticleController();
         return instance;
@@ -20,20 +22,17 @@ public class ArticleController {
 
     private ArticleController(){
         articles = new HashMap<>();
+        userController = UserController.getInstance();
     }
 
-    public Article createArticle(String title, String body, User writer) throws SystemException {
-        Article article = writer.CreateArticle(title, body);
+    public Article createArticle(String title, String body, String writerName) throws SystemException {
+        User user = userController.getUser(writerName);
+        Article article = user.CreateArticle(title, body);
         articles.put(article.getTitle() , article);
         return article;
     }
 
-    public Comment createComment(String title, String comment, String articleName, User commenter) throws SystemException {
-        if (!articles.containsKey(articleName))
-            throw new SystemException("no such article");
-        Article articleToCommentOn = articles.get(articleName);
-        return commenter.CreateComment(articleToCommentOn, title, comment);
-    }
+
 
     public Article getArticle(String name) throws SystemException {
         if (!articles.containsKey(name))
@@ -41,11 +40,5 @@ public class ArticleController {
         return articles.get(name);
     }
 
-    public Comment getComment(String articleName, String commentTitle) throws SystemException {
-        if (!articles.containsKey(articleName))
-            throw new SystemException("no such article");
-        Article article = articles.get(articleName);
-        return article.getComment(commentTitle);
-    }
 
 }

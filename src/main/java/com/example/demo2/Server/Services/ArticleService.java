@@ -14,17 +14,17 @@ public class ArticleService {
         this.articleController = ArticleController.getInstance();
     }
 
-//    public String createArticle(RequestArticle articleToCreate){
-//        FacadeArticle toReturn;
-//        try{
-//            Article article = articleController.createArticle(articleToCreate.getTitle(),
-//                    articleToCreate.getBody(), articleToCreate.getWriterName());
-//            toReturn = new FacadeArticle(article);
-//        }catch (Exception e){
-//            toReturn = new FacadeArticle(e.getMessage());
-//        }
-//        return toReturn;
-//    }
+    public FacadeArticle createArticle(FacadeArticle articleToCreate){
+        FacadeArticle toReturn;
+        try{
+            Article article = articleController.createArticle(articleToCreate.getTitle(),
+                    articleToCreate.getBody(), articleToCreate.getWriterName());
+            toReturn = new FacadeArticle(article);
+        }catch (Exception e){
+            toReturn = new FacadeArticle(e.getMessage());
+        }
+        return toReturn;
+    }
 
     public FacadeArticle getArticle(String articleName){
         FacadeArticle toReturn;
@@ -34,6 +34,14 @@ public class ArticleService {
         }catch (Exception e){
             toReturn = new FacadeArticle(e.getMessage());
         }
+        return toReturn;
+    }
+
+    public Article getBusinessArticle(String articleName){
+        Article toReturn = null;
+        try{
+            toReturn = articleController.getArticle(articleName);
+        }catch (Exception e){}
         return toReturn;
     }
 }
