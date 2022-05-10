@@ -3,6 +3,8 @@ package com.example.demo2.Server.FacadeObjects;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,8 +29,11 @@ public class FacadeUser extends Response{
         //initialize comments
         this.comments = new HashMap<>();
         Map<String, Comment> businessComments = user.getComments();
-        for (Map.Entry<String, Comment> entry : businessComments.entrySet())
+        for (Map.Entry<String, Comment> entry : businessComments.entrySet()) {
+            Comment comment = entry.getValue();
+            FacadeComment facadeComment = new FacadeComment(comment);
             this.comments.put(entry.getKey(), new FacadeComment(entry.getValue()));
+        }
     }
 
     public FacadeUser(String message) {
@@ -66,5 +71,14 @@ public class FacadeUser extends Response{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String toJson(){
+        String json = "";
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        try {
+            json = ow.writeValueAsString(this);
+        }catch (Exception e){}
+        return json;
     }
 }

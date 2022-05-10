@@ -2,6 +2,9 @@ package com.example.demo2.Server.FacadeObjects;
 
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -61,5 +64,14 @@ public class FacadeArticle extends Response {
 
     public void setComments(Map<String, FacadeComment> comments) {
         this.comments = comments;
+    }
+
+    public String toJson(){
+        String json = "";
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
+        try {
+            json = ow.writeValueAsString(this);
+        }catch (Exception e){}
+        return json;
     }
 }

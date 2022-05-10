@@ -32,13 +32,9 @@ public class ArticleController {
         return article;
     }
 
-
-
     public Article getArticle(String name) throws SystemException {
         if (!articles.containsKey(name))
             throw new SystemException("no such article");
         return articles.get(name);
     }
-
-
 }

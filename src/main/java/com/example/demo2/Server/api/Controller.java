@@ -24,43 +24,43 @@ public class Controller implements Iapi{
         this.service = service;
     }
 
-    @GetMapping(value = "/user1")
-    public FacadeUser createUser1(@RequestParam (value = "name") String name){
-        return new FacadeUser();
-    }
+//    @GetMapping(value = "/user1")
+//    public FacadeUser createUser1(@RequestParam (value = "name") String name){
+//        return new FacadeUser();
+//    }
     @PostMapping(value = "/user")
     @Override
-    public FacadeUser createUser(FacadeUser user) {
+    public FacadeUser createUser(@RequestBody FacadeUser user) {
         return service.createUser(user);
     }
 
     @PostMapping(value = "/article")
     @Override
-    public FacadeArticle createArticle(FacadeArticle article) {
+    public FacadeArticle createArticle(@RequestBody FacadeArticle article) {
         return service.createArticle(article);
     }
 
     @PostMapping(value = "/comment")
     @Override
-    public FacadeComment createComment(FacadeComment comment) {
+    public FacadeComment createComment(@RequestBody FacadeComment comment) {
         return service.createComment(comment);
     }
 
     @GetMapping(value = "/user")
     @Override
-    public FacadeUser getUser(String userName) {
+    public FacadeUser getUser(@RequestParam(value = "name") String userName) {
         return service.getUser(userName);
     }
 
     @GetMapping(value = "/article")
     @Override
-    public FacadeArticle getArticle(String articleName) {
+    public FacadeArticle getArticle(@RequestParam(value = "articleName")String articleName) {
         return service.getArticle(articleName);
     }
 
     @GetMapping(value = "/comment")
     @Override
-    public FacadeComment getComment(int articleId) {
+    public FacadeComment getComment(@RequestParam(value = "commentId")int articleId) {
         return service.getComment(articleId);
     }
 }

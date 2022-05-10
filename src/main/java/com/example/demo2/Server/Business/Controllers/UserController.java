@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class UserController {
     private Map<String, User> users;
-    private User loggedIn;
+//    private User loggedIn;
     private static UserController instance;
 
     public static UserController getInstance() {
@@ -35,30 +35,12 @@ public class UserController {
         return users.get(name);
     }
 
-    public User getLoggedInUser(String userName) throws SystemException {
-        if (!users.containsKey(userName))
-            throw new SystemException("no such user");
-        if (loggedIn.getName() != userName)
-            throw new SystemException("user is not logged in");
-        return loggedIn;
-    }
+//    public User getLoggedInUser(String userName) throws SystemException {
+//        if (!users.containsKey(userName))
+//            throw new SystemException("no such user");
+//        if (loggedIn.getName() != userName)
+//            throw new SystemException("user is not logged in");
+//        return loggedIn;
+//    }
 
-    public User login(String name, String password) throws SystemException {
-        if (!users.containsKey(name))
-            throw new SystemException("no such user");
-        User user = users.get(name);
-        if (!user.getPassword().equals(password))
-            throw new SystemException("wrong password");
-        loggedIn = users.get(name);
-        return user;
-    }
-
-    public void logout(String userName) throws SystemException {
-        if (!users.containsKey(userName))
-            throw new SystemException("no such user");
-        User user = users.get(userName);
-        if (!loggedIn.getName().equals(userName))
-            throw new SystemException("user is not logged in");
-        loggedIn = null;
-    }
 }

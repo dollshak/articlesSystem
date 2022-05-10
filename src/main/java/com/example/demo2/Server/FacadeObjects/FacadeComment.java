@@ -15,6 +15,7 @@ public class FacadeComment extends Response{
         this.writer = comment.getWriter();
         this.title = comment.getTitle();
         this.commentBody = comment.getCommentBody();
+        this.article = comment.getArticleName();
     }
 
     public FacadeComment(String message) {

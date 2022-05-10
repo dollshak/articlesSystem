@@ -23,7 +23,7 @@ public class Article {
     public Comment createComment(String title, String comment, String userName) throws SystemException {
         if (comments.containsKey(title))
             throw new SystemException("there is already a comment with this name on this article");
-        Comment newComment = new Comment(title, comment, userName, getNextCommentId());
+        Comment newComment = new Comment(title, comment, userName, getNextCommentId(), this.getTitle());
         comments.put(title, newComment);
         return newComment;
     }

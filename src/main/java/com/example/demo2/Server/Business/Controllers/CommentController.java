@@ -32,7 +32,8 @@ public class CommentController {
     public Comment createComment(String title, String comment, String articleName, String commenterName,
                                  Article article) throws SystemException {
         User user = userController.getUser(commenterName);
-        return user.CreateComment(article, title, comment);
+        Comment newComment = user.CreateComment(article, title, comment);
+        commentsById.put(newComment.getId(), newComment);
+        return newComment;
     }
-
 }
