@@ -1,9 +1,14 @@
 package com.example.demo2.Server.Services;
 
+import com.example.demo2.Server.Business.BusinessObjects.Article;
+import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.UserController;
+import com.example.demo2.Server.FacadeObjects.FacadeArticle;
+import com.example.demo2.Server.FacadeObjects.FacadeComment;
 import com.example.demo2.Server.FacadeObjects.FacadeUser;
+import com.example.demo2.Server.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,27 +20,23 @@ public class UserService {
     public UserService() {
     }
 
-    public FacadeUser createUser(FacadeUser userToCreate) {
-        FacadeUser toReturn;
-        try {
-            User user = userController.createUser(userToCreate.getName(),
-                    userToCreate.getPassword());
-            toReturn = new FacadeUser(user);
-        }catch (Exception e){
-            toReturn = new FacadeUser(e.getMessage());
-        }
-        return toReturn;
+    public User createUser(FacadeUser userToCreate) throws SystemException {
+        return userController.createUser(userToCreate.getName(), userToCreate.getPassword());
     }
 
-    public FacadeUser getUser(String userName){
-        FacadeUser toReturn;
-        try {
-            User user = userController.getUser(userName);
-            toReturn = new FacadeUser(user);
-        }catch (Exception e){
-            toReturn = new FacadeUser(e.getMessage());
-        }
-        return toReturn;
+    public User getUser(String userName) throws SystemException {
+        return userController.getUser(userName);
     }
 
+    public Article createArticle(FacadeArticle articleToCreate) throws SystemException {
+        return userController.createArticle(articleToCreate.getTitle(), articleToCreate.getBody(),
+                articleToCreate.getWriterName());
+    }
+
+    public Comment createComment(FacadeComment commentToCreate, Article article) throws SystemException {
+        return userController.createComment(article,
+                commentToCreate.getTitle(),
+                commentToCreate.getCommentBody(),
+                commentToCreate.getWriter());
+    }
 }

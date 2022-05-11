@@ -5,29 +5,27 @@ import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FacadeArticle extends Response {
     private String title;
     private String body;
     private String writerName;
-    private Map<String, FacadeComment> comments;
+    private List<Integer> comments;
 
     public FacadeArticle(){
-        this.comments = new HashMap<>();
+        this.comments = new ArrayList<>();
     }
 
     public FacadeArticle(Article article) {
         this.title = article.getTitle();
         this.body = article.getBody();
         this.writerName = article.getWriterName();
-        this.comments = new HashMap<>();
-        Map<String, Comment> businessComments = article.getComments();
-        for (Map.Entry<String, Comment> entry : businessComments.entrySet()){
-            FacadeComment responseComment = new FacadeComment(entry.getValue());
-            this.comments.put(entry.getKey(), responseComment);
-        }
+        Map<Integer, Comment> businessComments = article.getComments();
+        this.comments = new ArrayList<>(businessComments.keySet());
     }
 
     public FacadeArticle(String message) {
@@ -58,20 +56,11 @@ public class FacadeArticle extends Response {
         this.writerName = writerName;
     }
 
-    public Map<String, FacadeComment> getComments() {
+    public List<Integer> getComments() {
         return comments;
     }
 
-    public void setComments(Map<String, FacadeComment> comments) {
+    public void setComments(List<Integer> comments) {
         this.comments = comments;
-    }
-
-    public String toJson(){
-        String json = "";
-        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
-        try {
-            json = ow.writeValueAsString(this);
-        }catch (Exception e){}
-        return json;
     }
 }

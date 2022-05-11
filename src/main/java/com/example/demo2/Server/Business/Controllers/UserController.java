@@ -1,5 +1,7 @@
 package com.example.demo2.Server.Business.Controllers;
 
+import com.example.demo2.Server.Business.BusinessObjects.Article;
+import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.Data.User.UserRepository;
 import com.example.demo2.Server.SystemException;
@@ -42,4 +44,17 @@ public class UserController {
         return users.get(name);
     }
 
+    public Article createArticle(String title, String body, String writer) throws SystemException {
+        if (!users.containsKey(writer))
+            throw new SystemException("no such user");
+        User user = users.get(writer);
+        return user.createArticle(title, body);
+    }
+
+    public Comment createComment(Article article, String title, String commentBody, String writer) throws SystemException {
+        if (!users.containsKey(writer))
+            throw new SystemException("no such user");
+        User user = users.get(writer);
+        return user.createComment(article, title, commentBody);
+    }
 }

@@ -2,8 +2,10 @@ package com.example.demo2.Server.Data.Comment;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Comments")
 public class DalComment {
     @Id
     private int id;

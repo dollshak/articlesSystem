@@ -9,7 +9,7 @@ public class Article {
     private final String title; //unique
     private String body;
     private String writerName;
-    private Map<String, Comment> comments;
+    private Map<Integer, Comment> comments;
     private int nextCommentId;
 
     public Article(String title, String body, String writerName) {
@@ -24,7 +24,7 @@ public class Article {
         if (comments.containsKey(title))
             throw new SystemException("there is already a comment with this name on this article");
         Comment newComment = new Comment(title, comment, userName, getNextCommentId(), this.getTitle());
-        comments.put(title, newComment);
+        comments.put(newComment.getId(), newComment);
         return newComment;
     }
 
@@ -52,7 +52,7 @@ public class Article {
         return writerName;
     }
 
-    public Map<String, Comment> getComments() {
+    public Map<Integer, Comment> getComments() {
         return comments;
     }
 }

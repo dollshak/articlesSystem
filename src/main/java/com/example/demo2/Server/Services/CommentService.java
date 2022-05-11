@@ -5,6 +5,7 @@ import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.CommentController;
 import com.example.demo2.Server.FacadeObjects.FacadeComment;
+import com.example.demo2.Server.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,30 +17,12 @@ public class CommentService {
     public CommentService() {
     }
 
-    public FacadeComment createComment(FacadeComment commentToCreate, Article article){
-        FacadeComment toReturn;
-        try{
-            Comment comment = commentController.createComment(commentToCreate.getTitle(),
-                    commentToCreate.getCommentBody(),
-                    commentToCreate.getArticle(),
-                    commentToCreate.getWriter(),
-                    article);
-            toReturn = new FacadeComment(comment);
-        }catch (Exception e){
-            toReturn = new FacadeComment(e.getMessage());
-        }
-        return toReturn;
+    public Comment createComment(Comment comment) throws SystemException {
+        return commentController.createComment(comment);
     }
 
-    public FacadeComment getComment(int commentId){
-        FacadeComment toReturn;
-        try{
-            Comment comment = commentController.getComment(commentId);
-            toReturn = new FacadeComment(comment);
-        }catch (Exception e){
-            toReturn = new FacadeComment(e.getMessage());
-        }
-        return toReturn;
+    public Comment getComment(int commentId) throws SystemException {
+        return commentController.getComment(commentId);
     }
 
 }

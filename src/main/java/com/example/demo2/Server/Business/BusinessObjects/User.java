@@ -10,7 +10,7 @@ public class User {
     private final String name; //unique
     private String password;
     private Map<String, Article> articleNames;
-    private Map<String, Comment> comments;
+    private Map<Integer, Comment> comments;
 
     public User(String name, String password) {
         this.name = name;
@@ -23,7 +23,7 @@ public class User {
         return articleNames.containsKey(title);
     }
 
-    public Article CreateArticle(String title, String body) throws SystemException {
+    public Article createArticle(String title, String body) throws SystemException {
         if (hasArticleWithName(title))
             throw new SystemException("you already have an article with that name");
         Article newArticle = new Article(title, body, this.name);
@@ -31,9 +31,9 @@ public class User {
         return newArticle;
     }
 
-    public Comment CreateComment(Article article, String title, String comment) throws SystemException {
+    public Comment createComment(Article article, String title, String comment) throws SystemException {
         Comment newComment = article.createComment(title, comment, this.name);
-        this.comments.put(title, newComment);
+        this.comments.put(newComment.getId(), newComment);
         return newComment;
     }
 
@@ -49,7 +49,7 @@ public class User {
         return articleNames;
     }
 
-    public Map<String, Comment> getComments() {
+    public Map<Integer, Comment> getComments() {
         return comments;
     }
 

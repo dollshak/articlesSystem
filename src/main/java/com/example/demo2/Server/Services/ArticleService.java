@@ -3,6 +3,7 @@ package com.example.demo2.Server.Services;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.FacadeObjects.FacadeArticle;
+import com.example.demo2.Server.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,34 +15,12 @@ public class ArticleService {
     public ArticleService() {
     }
 
-    public FacadeArticle createArticle(FacadeArticle articleToCreate){
-        FacadeArticle toReturn;
-        try{
-            Article article = articleController.createArticle(articleToCreate.getTitle(),
-                    articleToCreate.getBody(), articleToCreate.getWriterName());
-            toReturn = new FacadeArticle(article);
-        }catch (Exception e){
-            toReturn = new FacadeArticle(e.getMessage());
-        }
-        return toReturn;
+    public Article createArticle(Article articleToCreate) throws SystemException {
+        return articleController.createArticle(articleToCreate);
     }
 
-    public FacadeArticle getArticle(String articleName){
-        FacadeArticle toReturn;
-        try{
-            Article article = articleController.getArticle(articleName);
-            toReturn = new FacadeArticle(article);
-        }catch (Exception e){
-            toReturn = new FacadeArticle(e.getMessage());
-        }
-        return toReturn;
+    public Article getArticle(String articleName) throws SystemException {
+        return articleController.getArticle(articleName);
     }
 
-    public Article getBusinessArticle(String articleName){
-        Article toReturn = null;
-        try{
-            toReturn = articleController.getArticle(articleName);
-        }catch (Exception e){}
-        return toReturn;
-    }
 }
