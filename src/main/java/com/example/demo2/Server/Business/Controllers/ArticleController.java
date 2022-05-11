@@ -3,30 +3,34 @@ package com.example.demo2.Server.Business.Controllers;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
+import com.example.demo2.Server.Data.Article.ArticleRepository;
 import com.example.demo2.Server.SystemException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class ArticleController {
     private Map<String, Article> articles;
-    private UserController userController;
-    private static ArticleController instance;
+//    private static ArticleController instance;
 
+    @Autowired
+    private ArticleRepository articleRepository;
 
-    public static ArticleController getInstance() {
-        if (instance == null)
-            instance = new ArticleController();
-        return instance;
-    }
+//    public static ArticleController getInstance() {
+//        if (instance == null)
+//            instance = new ArticleController();
+//        return instance;
+//    }
 
     private ArticleController(){
         articles = new HashMap<>();
-        userController = UserController.getInstance();
     }
 
     public Article createArticle(String title, String body, String writerName) throws SystemException {
-        User user = userController.getUser(writerName);
+        User user = UserController.getInstance().getUser(writerName);
         Article article = user.CreateArticle(title, body);
         articles.put(article.getTitle() , article);
         return article;

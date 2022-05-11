@@ -1,10 +1,9 @@
 package com.example.demo2.Server.Business.BusinessObjects;
 
+import com.example.demo2.Server.Data.User.DalUser;
 import com.example.demo2.Server.SystemException;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -52,5 +51,9 @@ public class User {
 
     public Map<String, Comment> getComments() {
         return comments;
+    }
+
+    public DalUser toDalObject(){
+        return new DalUser(name, password);
     }
 }

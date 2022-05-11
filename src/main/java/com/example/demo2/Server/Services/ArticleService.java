@@ -3,14 +3,15 @@ package com.example.demo2.Server.Services;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.FacadeObjects.FacadeArticle;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ArticleService {
+    @Autowired
     private ArticleController articleController;
 
     public ArticleService() {
-        this.articleController = ArticleController.getInstance();
     }
 
     public FacadeArticle createArticle(FacadeArticle articleToCreate){

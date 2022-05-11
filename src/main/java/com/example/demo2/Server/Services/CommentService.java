@@ -5,14 +5,15 @@ import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.CommentController;
 import com.example.demo2.Server.FacadeObjects.FacadeComment;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CommentService {
+    @Autowired
     private CommentController commentController;
 
     public CommentService() {
-        this.commentController = CommentController.getInstance();
     }
 
     public FacadeComment createComment(FacadeComment commentToCreate, Article article){

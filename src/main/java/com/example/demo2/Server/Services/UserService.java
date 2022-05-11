@@ -4,14 +4,15 @@ import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.Business.Controllers.UserController;
 import com.example.demo2.Server.FacadeObjects.FacadeUser;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+    @Autowired
     private UserController userController;
 
     public UserService() {
-        this.userController = UserController.getInstance();
     }
 
     public FacadeUser createUser(FacadeUser userToCreate) {
