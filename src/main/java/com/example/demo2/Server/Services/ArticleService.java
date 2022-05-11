@@ -3,9 +3,12 @@ package com.example.demo2.Server.Services;
 import com.example.demo2.Server.Business.BusinessObjects.Article;
 import com.example.demo2.Server.Business.Controllers.ArticleController;
 import com.example.demo2.Server.FacadeObjects.FacadeArticle;
+import com.example.demo2.Server.FacadeObjects.FacadeFindString;
 import com.example.demo2.Server.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ArticleService {
@@ -23,4 +26,7 @@ public class ArticleService {
         return articleController.getArticle(articleName);
     }
 
+    public List<FacadeFindString> findString(String str) {
+        return articleController.findString(str);
+    }
 }

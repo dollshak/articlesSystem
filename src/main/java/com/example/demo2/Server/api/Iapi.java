@@ -2,7 +2,10 @@ package com.example.demo2.Server.api;
 
 import com.example.demo2.Server.FacadeObjects.FacadeArticle;
 import com.example.demo2.Server.FacadeObjects.FacadeComment;
+import com.example.demo2.Server.FacadeObjects.FacadeFindString;
 import com.example.demo2.Server.FacadeObjects.FacadeUser;
+
+import java.util.List;
 
 public interface Iapi {
 
@@ -16,14 +19,14 @@ public interface Iapi {
     /**
      *
      * @param article
-     * @return new article's name
+     * @return new article
      */
     FacadeArticle createArticle(FacadeArticle article);
 
     /**
      *
      * @param comment
-     * @return new comment's id
+     * @return new comment
      */
     FacadeComment createComment(FacadeComment comment);
 
@@ -47,5 +50,12 @@ public interface Iapi {
      * @return comment
      */
     FacadeComment getComment(int articleId);
+
+    /**
+     *
+     * @param str - string to find in articles
+     * @return articles and offests in articles of str
+     */
+    List<FacadeFindString> findString(String str);
 
 }

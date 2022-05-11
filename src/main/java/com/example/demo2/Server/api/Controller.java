@@ -5,6 +5,7 @@ import com.example.demo2.Server.Business.BusinessObjects.Comment;
 import com.example.demo2.Server.Business.BusinessObjects.User;
 import com.example.demo2.Server.FacadeObjects.FacadeArticle;
 import com.example.demo2.Server.FacadeObjects.FacadeComment;
+import com.example.demo2.Server.FacadeObjects.FacadeFindString;
 import com.example.demo2.Server.FacadeObjects.FacadeUser;
 import com.example.demo2.Server.Services.ArticleService;
 import com.example.demo2.Server.Services.CommentService;
@@ -15,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping(value = "/rest")
 @RestController
@@ -111,6 +114,18 @@ public class Controller implements Iapi{
             toReturn = new FacadeComment(comment);
         }catch (Exception e){
             toReturn = new FacadeComment(e.getMessage());
+        }
+        return toReturn;
+    }
+
+    @GetMapping(value = "/findString")
+    @Override
+    public List<FacadeFindString> findString(@RequestParam(value = "str") String str) {
+        List<FacadeFindString> toReturn = new ArrayList<>();
+        try{
+            toReturn = articleService.findString(str);
+        }catch (Exception e){
+            toReturn.add(new FacadeFindString(e.getMessage()));
         }
         return toReturn;
     }
