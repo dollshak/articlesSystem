@@ -14,10 +14,10 @@ public class DalUser {
     private String name;
     private String password;
     @OneToMany(targetEntity = DalArticle.class , cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id" , referencedColumnName = "name")
+    @JoinColumn(name = "writer" , referencedColumnName = "name")
     private List<DalArticle> articles;
     @OneToMany(targetEntity = DalComment.class , cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id" , referencedColumnName = "name")
+    @JoinColumn(name = "commenter" , referencedColumnName = "name")
     private List<DalComment> comments;
 
     public DalUser(String name, String password) {

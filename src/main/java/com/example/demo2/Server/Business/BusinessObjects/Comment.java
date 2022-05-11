@@ -41,7 +41,7 @@ public class Comment {
 
     public DalComment getDalObject() {
         if (dalComment == null)
-            dalComment = new DalComment(id, title, articleName, commentBody);
+            dalComment = new DalComment(id, title, commentBody);
         return dalComment;
     }
 }

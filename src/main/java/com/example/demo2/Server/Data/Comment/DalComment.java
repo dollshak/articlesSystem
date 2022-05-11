@@ -10,16 +10,14 @@ public class DalComment {
     @Id
     private int id;
     private String title;
-    private String articleName;
     private String commentBody;
 
     public DalComment() {
     }
 
-    public DalComment(int id, String title, String articleName, String commentBody) {
+    public DalComment(int id, String title, String commentBody) {
         this.id = id;
         this.title = title;
-        this.articleName = articleName;
         this.commentBody = commentBody;
     }
 
@@ -37,14 +35,6 @@ public class DalComment {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public String getArticleName() {
-        return articleName;
-    }
-
-    public void setArticleName(String articleName) {
-        this.articleName = articleName;
     }
 
     public String getCommentBody() {

@@ -22,6 +22,7 @@ public class Article {
 
     public Comment createComment(String title, String comment, String userName, int id) throws SystemException {
         Comment newComment = new Comment(title, comment, userName,id, this.getTitle());
+        dalArticle.addComment(newComment.getDalObject());
         comments.put(newComment.getId(), newComment);
         return newComment;
     }
