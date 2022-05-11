@@ -28,13 +28,14 @@ public class UserController {
 
     private UserController(){
         users = new HashMap<>();
+        nextCommentId = 1;
     }
 
     public User createUser(String name, String password) throws SystemException {
         if (users.containsKey(name))
             throw new SystemException("username already exists in the system, please choose another username");
         User newUser = new User(name, password);
-        userRepository.save(newUser.toDalObject());
+        userRepository.save(newUser.getDalUser());
         users.put(name, newUser);
         return newUser;
     }
@@ -49,7 +50,9 @@ public class UserController {
         if (!users.containsKey(writer))
             throw new SystemException("no such user");
         User user = users.get(writer);
-        return user.createArticle(title, body);
+        Article newArticle = user.createArticle(title, body);
+        userRepository.save(user.getDalUser());
+        return newArticle;
     }
 
     public Comment createComment(Article article, String title, String commentBody,
@@ -57,7 +60,9 @@ public class UserController {
         if (!users.containsKey(writer))
             throw new SystemException("no such user");
         User user = users.get(writer);
-        return user.createComment(article, title, commentBody, getNextCommentId());
+        Comment newComment = user.createComment(article, title, commentBody, getNextCommentId());
+        userRepository.save(user.getDalUser());
+        return newComment;
     }
 
     private int getNextCommentId(){

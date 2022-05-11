@@ -10,15 +10,13 @@ public class DalArticle {
     @Id
     private String title;
     private String body;
-    private String writerName;
 
     public DalArticle() {
     }
 
-    public DalArticle(String title, String body, String writerName) {
+    public DalArticle(String title, String body) {
         this.title = title;
         this.body = body;
-        this.writerName = writerName;
     }
 
     public String getTitle() {
@@ -37,11 +35,4 @@ public class DalArticle {
         this.body = body;
     }
 
-    public String getWriterName() {
-        return writerName;
-    }
-
-    public void setWriterName(String writerName) {
-        this.writerName = writerName;
-    }
 }

@@ -1,9 +1,12 @@
 package com.example.demo2.Server.Business.BusinessObjects;
 
+import com.example.demo2.Server.Data.Article.DalArticle;
 import com.example.demo2.Server.Data.User.DalUser;
 import com.example.demo2.Server.SystemException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class User {
@@ -11,6 +14,7 @@ public class User {
     private String password;
     private Map<String, Article> articleNames;
     private Map<Integer, Comment> comments;
+    private DalUser dalUser;
 
     public User(String name, String password) {
         this.name = name;
@@ -27,6 +31,7 @@ public class User {
         if (hasArticleWithName(title))
             throw new SystemException("you already have an article with that name");
         Article newArticle = new Article(title, body, this.name);
+        dalUser.addArticle(newArticle.getDalObject());
         articleNames.put(title, newArticle);
         return newArticle;
     }
@@ -34,6 +39,7 @@ public class User {
     public Comment createComment(Article article, String title,
                                  String comment, int id) throws SystemException {
         Comment newComment = article.createComment(title, comment, this.name, id);
+        dalUser.addComment(newComment.getDalObject());
         this.comments.put(newComment.getId(), newComment);
         return newComment;
     }
@@ -54,7 +60,9 @@ public class User {
         return comments;
     }
 
-    public DalUser toDalObject(){
-        return new DalUser(name, password);
+    public DalUser getDalUser(){
+        if (dalUser == null)
+            dalUser = new DalUser(name, password);
+        return dalUser;
     }
 }

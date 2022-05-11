@@ -27,7 +27,6 @@ public class CommentController {
     }
 
     public Comment createComment(Comment newComment) throws SystemException {
-        commentRepository.save(newComment.toDalObject());
         commentsById.put(newComment.getId(), newComment);
         return newComment;
     }

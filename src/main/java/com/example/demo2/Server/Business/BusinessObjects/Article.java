@@ -11,6 +11,7 @@ public class Article {
     private String body;
     private String writerName;
     private Map<Integer, Comment> comments;
+    private DalArticle dalArticle;
 
     public Article(String title, String body, String writerName) {
         this.title = title;
@@ -23,12 +24,6 @@ public class Article {
         Comment newComment = new Comment(title, comment, userName,id, this.getTitle());
         comments.put(newComment.getId(), newComment);
         return newComment;
-    }
-
-    public Comment getComment(String commentTitle) throws SystemException {
-        if (!comments.containsKey(commentTitle))
-            throw new SystemException("no such comment on this article");
-        return comments.get(commentTitle);
     }
 
     public String getTitle() {
@@ -47,7 +42,9 @@ public class Article {
         return comments;
     }
 
-    public DalArticle toDalObject(){
-        return new DalArticle(title, body, writerName);
+    public DalArticle getDalObject() {
+        if (dalArticle == null)
+            dalArticle = new DalArticle(title, body);
+        return dalArticle;
     }
 }

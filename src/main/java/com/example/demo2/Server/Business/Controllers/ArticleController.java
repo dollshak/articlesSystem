@@ -22,7 +22,7 @@ public class ArticleController {
     }
 
     public Article createArticle(Article article) throws SystemException {
-        articleRepository.save(article.toDalObject());
+        articleRepository.save(article.getDalObject());
         articles.put(article.getTitle() , article);
         return article;
     }

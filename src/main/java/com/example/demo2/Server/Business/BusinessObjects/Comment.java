@@ -8,6 +8,7 @@ public class Comment {
     private String title;
     private String articleName;
     private String commentBody;
+    private DalComment dalComment;
 
     public Comment(String title, String commentBody, String writer,
                    int commentId, String articleName) {
@@ -38,7 +39,9 @@ public class Comment {
         return articleName;
     }
 
-    public DalComment toDalObject(){
-        return new DalComment(id, writer, title, articleName, commentBody);
+    public DalComment getDalObject() {
+        if (dalComment == null)
+            dalComment = new DalComment(id, title, articleName, commentBody);
+        return dalComment;
     }
 }

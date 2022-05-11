@@ -9,7 +9,6 @@ import javax.persistence.Table;
 public class DalComment {
     @Id
     private int id;
-    private String writer;
     private String title;
     private String articleName;
     private String commentBody;
@@ -17,9 +16,8 @@ public class DalComment {
     public DalComment() {
     }
 
-    public DalComment(int id, String writer, String title, String articleName, String commentBody) {
+    public DalComment(int id, String title, String articleName, String commentBody) {
         this.id = id;
-        this.writer = writer;
         this.title = title;
         this.articleName = articleName;
         this.commentBody = commentBody;
@@ -31,14 +29,6 @@ public class DalComment {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getWriter() {
-        return writer;
-    }
-
-    public void setWriter(String writer) {
-        this.writer = writer;
     }
 
     public String getTitle() {
