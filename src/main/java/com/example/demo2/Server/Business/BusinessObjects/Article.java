@@ -21,39 +21,24 @@ public class Article {
         this.body = body;
         this.writerName = writerName;
         this.comments = new HashMap<>();
-//        this.stringToOffsets = initializeStringToOffsets(body);
-        Map<String, List<Integer>> toReturn = new HashMap<>();
+
+        //initialize stringToOffsets
+        Map<String, List<Integer>> res = new HashMap<>();
         String[] splitStringArray = body.split(" ");
         int offset = -1;
         for (String s : splitStringArray) {
             offset = body.indexOf(s, offset + 1);
-            if (toReturn.containsKey(s))
-                toReturn.get(s).add(offset);
+            if (res.containsKey(s))
+                res.get(s).add(offset);
             else {
                 List<Integer> offsets = new ArrayList<>();
                 offsets.add(offset);
-                toReturn.put(s, offsets);
+                res.put(s, offsets);
             }
         }
-        this.stringToOffsets = toReturn;
+        this.stringToOffsets = res;
     }
 
-    private Map<String, List<Integer>> initializeStringToOffsets(String body) {
-        Map<String, List<Integer>> toReturn = new HashMap<>();
-        String[] splitStringArray = body.split("");
-        int offset = -1;
-        for (String s : splitStringArray) {
-            offset = body.indexOf(s, offset + 1);
-            if (toReturn.containsKey(s))
-                toReturn.get(s).add(offset);
-            else {
-                List<Integer> offsets = new ArrayList<>();
-                offsets.add(offset);
-                toReturn.put(s, offsets);
-            }
-        }
-        return toReturn;
-    }
 
     public Comment createComment(String title, String comment, String userName, int id) throws SystemException {
         Comment newComment = new Comment(title, comment, userName,id, this.getTitle());
@@ -62,6 +47,17 @@ public class Article {
         return newComment;
     }
 
+    public DalArticle getDalObject() {
+        if (dalArticle == null)
+            dalArticle = new DalArticle(title, body);
+        return dalArticle;
+    }
+
+    public List<Integer> getOffsets(String str) {
+        if (!stringToOffsets.containsKey(str))
+            return null;
+        return stringToOffsets.get(str);
+    }
     public String getTitle() {
         return title;
     }
@@ -78,15 +74,4 @@ public class Article {
         return comments;
     }
 
-    public DalArticle getDalObject() {
-        if (dalArticle == null)
-            dalArticle = new DalArticle(title, body);
-        return dalArticle;
-    }
-
-    public List<Integer> getOffsets(String str) {
-        if (!stringToOffsets.containsKey(str))
-            return null;
-        return stringToOffsets.get(str);
-    }
 }

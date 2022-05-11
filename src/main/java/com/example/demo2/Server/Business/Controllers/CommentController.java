@@ -20,14 +20,15 @@ public class CommentController {
         commentsById = new HashMap<>();
     }
 
+    public Comment createComment(Comment newComment) throws SystemException {
+        commentsById.put(newComment.getId(), newComment);
+        return newComment;
+    }
+
     public Comment getComment(int commentId) throws SystemException {
         if (!commentsById.containsKey(commentId))
             throw new SystemException("no such comment");
         return commentsById.get(commentId);
     }
 
-    public Comment createComment(Comment newComment) throws SystemException {
-        commentsById.put(newComment.getId(), newComment);
-        return newComment;
-    }
 }

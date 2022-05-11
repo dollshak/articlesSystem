@@ -13,7 +13,7 @@ public class SystemException extends Exception {
         message=mess;
         addOn=null;
     }
-    public SystemException( Object add){
+    public SystemException(Object add){
         message="";
         addOn=add;
     }

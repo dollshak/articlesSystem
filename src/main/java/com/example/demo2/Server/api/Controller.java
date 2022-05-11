@@ -10,7 +10,6 @@ import com.example.demo2.Server.FacadeObjects.FacadeUser;
 import com.example.demo2.Server.Services.ArticleService;
 import com.example.demo2.Server.Services.CommentService;
 import com.example.demo2.Server.Services.UserService;
-import org.atmosphere.config.service.Get;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +18,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-@RequestMapping(value = "/rest")
+//@RequestMapping(value = "/rest")
 @RestController
 public class Controller implements Iapi{
     private final UserService userService;
