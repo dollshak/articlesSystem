@@ -31,8 +31,9 @@ public class User {
         return newArticle;
     }
 
-    public Comment createComment(Article article, String title, String comment) throws SystemException {
-        Comment newComment = article.createComment(title, comment, this.name);
+    public Comment createComment(Article article, String title,
+                                 String comment, int id) throws SystemException {
+        Comment newComment = article.createComment(title, comment, this.name, id);
         this.comments.put(newComment.getId(), newComment);
         return newComment;
     }

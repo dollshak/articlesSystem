@@ -14,6 +14,7 @@ import java.util.Map;
 @Component
 public class UserController {
     private Map<String, User> users;
+    private int nextCommentId;
 
     @Autowired
     private UserRepository userRepository;
@@ -51,10 +52,17 @@ public class UserController {
         return user.createArticle(title, body);
     }
 
-    public Comment createComment(Article article, String title, String commentBody, String writer) throws SystemException {
+    public Comment createComment(Article article, String title, String commentBody,
+                                 String writer) throws SystemException {
         if (!users.containsKey(writer))
             throw new SystemException("no such user");
         User user = users.get(writer);
-        return user.createComment(article, title, commentBody);
+        return user.createComment(article, title, commentBody, getNextCommentId());
+    }
+
+    private int getNextCommentId(){
+        int toReturn = this.nextCommentId;
+        this.nextCommentId++;
+        return toReturn;
     }
 }

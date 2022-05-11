@@ -1,5 +1,6 @@
 package com.example.demo2.Server.Business.BusinessObjects;
 
+import com.example.demo2.Server.Data.Article.DalArticle;
 import com.example.demo2.Server.SystemException;
 
 import java.util.HashMap;
@@ -10,28 +11,18 @@ public class Article {
     private String body;
     private String writerName;
     private Map<Integer, Comment> comments;
-    private int nextCommentId;
 
     public Article(String title, String body, String writerName) {
         this.title = title;
         this.body = body;
         this.writerName = writerName;
         this.comments = new HashMap<>();
-        this.nextCommentId = 0;
     }
 
-    public Comment createComment(String title, String comment, String userName) throws SystemException {
-        if (comments.containsKey(title))
-            throw new SystemException("there is already a comment with this name on this article");
-        Comment newComment = new Comment(title, comment, userName, getNextCommentId(), this.getTitle());
+    public Comment createComment(String title, String comment, String userName, int id) throws SystemException {
+        Comment newComment = new Comment(title, comment, userName,id, this.getTitle());
         comments.put(newComment.getId(), newComment);
         return newComment;
-    }
-
-    private synchronized int getNextCommentId(){
-        int nextCommentId = this.nextCommentId;
-        this.nextCommentId = nextCommentId++;
-        return nextCommentId;
     }
 
     public Comment getComment(String commentTitle) throws SystemException {
@@ -54,5 +45,9 @@ public class Article {
 
     public Map<Integer, Comment> getComments() {
         return comments;
+    }
+
+    public DalArticle toDalObject(){
+        return new DalArticle(title, body, writerName);
     }
 }

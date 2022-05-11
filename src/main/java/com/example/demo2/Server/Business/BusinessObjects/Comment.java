@@ -1,5 +1,7 @@
 package com.example.demo2.Server.Business.BusinessObjects;
 
+import com.example.demo2.Server.Data.Comment.DalComment;
+
 public class Comment {
     private int id;
     private String writer;
@@ -34,5 +36,9 @@ public class Comment {
 
     public String getArticleName() {
         return articleName;
+    }
+
+    public DalComment toDalObject(){
+        return new DalComment(id, writer, title, articleName, commentBody);
     }
 }

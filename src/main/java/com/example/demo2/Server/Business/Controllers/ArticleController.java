@@ -6,7 +6,6 @@ import com.example.demo2.Server.Data.Article.ArticleRepository;
 import com.example.demo2.Server.SystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +22,7 @@ public class ArticleController {
     }
 
     public Article createArticle(Article article) throws SystemException {
+        articleRepository.save(article.toDalObject());
         articles.put(article.getTitle() , article);
         return article;
     }
